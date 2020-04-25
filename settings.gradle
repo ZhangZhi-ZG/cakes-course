@@ -1,0 +1,13 @@
+rootProject.name = 'cakes-course'
+include 'basic'
+include 'java8'
+include 'tools'
+include 'mybatis'
+include 'spring'
+include 'springboot'
+include 'mysql-schema-sync'
+include 'dubbo'
+include 'kafka'
+include 'auto-test-framework'
+include 'mock-server'
+
