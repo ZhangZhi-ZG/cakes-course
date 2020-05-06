@@ -4,9 +4,9 @@ package course.basic.oop;
  * @author cbooy
  * @date 2020-05-01
  */
-public class People {
+public  class People {
 
-  // 敞亮
+  // 常量（final修饰过的变量）--不可以被修改，而且必须被初始化
   public static final int III = 0;
 
   private String name;
@@ -15,7 +15,7 @@ public class People {
 
   private static String info;
 
-  public void foo1() {
+  public final void foo1() {
     System.out.println("People.foo1");
     foo3();
   }

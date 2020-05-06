@@ -13,7 +13,6 @@ public class FileOperatorApp {
 //  public static void main(String[] args) {
 //    FileOperator fp = new FileOperator();
 //  }
-
   public static void main(String[] args) {
     foo(new DiskFileOperator("xxx.mp4"));
   }

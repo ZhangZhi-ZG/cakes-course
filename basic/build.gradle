@@ -1,2 +1,6 @@
 dependencies {
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile('org.apache.commons:commons-lang3:3.10')
+    compile('com.google.guava:guava:29.0-jre')
+//    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
 }

@@ -4,7 +4,7 @@ package course.basic.oop;
  * @author cbooy
  * @date 2020-05-01
  */
-public class CarApp {
+public class CarApp{
 
   public static void main(String[] args) {
     // Exception in thread "main" java.lang.NullPointerException
