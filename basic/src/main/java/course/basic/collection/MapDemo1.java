@@ -37,7 +37,7 @@ public class MapDemo1 {
     Map<String, String> map = new HashMap<>();
     map.put("key1", "val1");
     map.put("key2", "val2");
-
+    //获取mao的key、value值
     Set<Entry<String, String>> entries = map.entrySet();
     for (Entry<String, String> entry : entries) {
       System.out.println("key=" + entry.getKey() + ", val=" + entry.getValue());

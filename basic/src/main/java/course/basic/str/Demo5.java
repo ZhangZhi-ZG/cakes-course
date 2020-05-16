@@ -7,6 +7,7 @@ package course.basic.str;
 public class Demo5 {
 
   public static void main(String[] args) {
+
     String str = "a,b,c,d,e,f,g";
 
     String[] arr = str.split(",");
@@ -15,14 +16,16 @@ public class Demo5 {
 
     StringBuffer buffer = new StringBuffer();
 
-    buffer.append("");
+
 
     for (String s : arr) {
       // str1 + str2
       res.append(s).append("*");
+      buffer.append(s).append("*");
     }
 
     System.out.println("res = " + res);
+    System.out.println("buffer = " + buffer);
 
   }
 

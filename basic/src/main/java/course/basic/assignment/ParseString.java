@@ -1,4 +1,4 @@
-package course.basic.oop;
+package course.basic.assignment;
 
 import java.util.ArrayList;
 import java.util.List;

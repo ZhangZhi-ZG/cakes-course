@@ -29,14 +29,16 @@ public class SetDemo1 {
     set2.add("x");
     set2.add("y");
 
+    //并集
     SetView<String> unionSetView = Sets.union(set1, set2);
     Set<String> unionSet = unionSetView.immutableCopy();
     System.out.println("unionSet = " + unionSet);
-
+    //差集
     SetView<String> diffSetView = Sets.difference(set2, set1);
     Set<String> diffSet = diffSetView.immutableCopy();
     System.out.println("diffSet = " + diffSet);
 
+    //交集
     Set<String> interSet = Sets.intersection(set2, set1);
 //    Set<String> interSet = interSetView.immutableCopy();
     System.out.println("interSet = " + interSet);

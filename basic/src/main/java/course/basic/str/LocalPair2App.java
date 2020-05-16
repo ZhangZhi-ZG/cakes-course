@@ -9,11 +9,19 @@ import java.util.Date;
 public class LocalPair2App {
 
   public static void main(String[] args) {
-    LocalPair2<String, String> pair = foo1();
 
+    //调用数据类型为String的方法，实例化时必须传入String的数据类型
+    LocalPair2<String, String> pair = foo1();
+    LocalPair2<String, Integer> pair2 = foo2();
+    LocalPair2<Integer, Date> pair3 = foo3();
+
+    //实例化时，数据类型不符，不用运行直接报错
+    //LocalPair2<String, String> pair1 = foo2();
+    //这时属性的返回值类型也发生变化，类型为String
     String val1 = pair.getK();
     String val2 = pair.getV();
 
+    //这里也不需要进行数据类型的强制转换
     String[] arr1 = val1.split(",");
     String[] arr2 = val2.split(",");
 

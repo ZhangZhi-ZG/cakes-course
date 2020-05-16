@@ -27,12 +27,16 @@ public class ListDemo1 {
         list.add("b");
         list.add("c");
         System.out.println("list = " + list);
-        //根据索引子列表
+        //根据索引获取子列表
         List<String> newList = list.subList(0, 2);
+
         System.out.println("newList = " + newList);
         list.subList(0,1);
-        String[] strArr = list.toArray(new String[0]);
-        System.out.println("strArr = " + strArr);
+        String[] strArr = list.toArray(new String[2]);
+        for (String s : strArr) {
+            System.out.println("s = " + s);
+        }
+
     }
 
 

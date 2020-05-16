@@ -33,8 +33,10 @@ public class ServiceApp {
     Method[] methods = clazz.getMethods();
     for (Method method : methods) {
       if (method.getName().equals("createUser")) {
+        //基于方法找到每个方法的参数数据类型
         Class<?>[] types = method.getParameterTypes();
         Class<?> type = types[0];
+        System.out.println("type = " + type);
 //        System.out.println("type.getName() = " + type.getName());
         // 4.拿到方法的属性，然后拼接成代码
         Field[] fields = type.getDeclaredFields();

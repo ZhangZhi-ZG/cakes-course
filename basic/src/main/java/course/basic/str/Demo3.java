@@ -20,7 +20,7 @@ public class Demo3 {
 //    boolean endsWith = str.endsWith("d");
 //    // "", 不是null
 //    boolean empty = str.isEmpty();
-//    boolean eq = str.equalsIgnoreCase("HELLO WORLD");
+    boolean eq = str.equalsIgnoreCase("HELLO WORLD");
 
     // 字符串替换
     // res = hello java, str="hello world"
