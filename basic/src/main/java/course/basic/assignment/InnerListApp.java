@@ -26,7 +26,7 @@ public class InnerListApp {
         l2.add(3);
         l2.add(4);
         InnerList list = new InnerList();
-        List<String> demo = list.innerListDemo(l1, l2);
+        List<String> demo = list.innerListDemo(l1,l2);
         System.out.println("demo = " + demo);
 
     }
