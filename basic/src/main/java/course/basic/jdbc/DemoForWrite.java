@@ -11,6 +11,7 @@ public class DemoForWrite {
     static String USER_NAME = "root";
     static String PASSWORD = "123456";
 
+    //静态方法，不需要实例化就可以直接调用
     public static int modify(String sql, List<Object> params) {
         try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
 

@@ -13,12 +13,16 @@ public class Demo3 {
         Thread thread = new Thread(runnable);
 
         thread.start();
+        thread.setName("test");
+        thread.interrupt();
+
     }
 
     static class ReadFileTask implements Runnable {
 
         @Override
         public void run() {
+            System.out.println("Thread.currentThread().getName() = " + Thread.currentThread().getName());
             System.out.println("读文件");
         }
     }

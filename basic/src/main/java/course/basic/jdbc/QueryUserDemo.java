@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.List;
 
 public class QueryUserDemo {
-    static String URL = "jdbc:mysql://127.0.0.1:3306/course?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
+    static String URL = "jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
     static String USER_NAME = "root";
     static String PASSWORD = "123456";
 
@@ -90,16 +90,23 @@ public class QueryUserDemo {
 
     // ----------------------- 以下是基于field的注入值 ---------------------------
 
+    //由于表对象的不同，处理返回值时采用泛型来解决
+    //传入sql、sql中的参数--params，以及一个类的实例
     public static <T> List<T> query2(String sql, List<Object> params, Class<T> clazz) {
+        //首先创建数据库连接，预编译sql等一系列操作
         try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
-
+            //创建一个List用来存储实例化的表对象
             List<T> results = Lists.newArrayList();
+            //循环获取每一行的查询结果
             while (resultSet.next()) {
+                //创建一个类的实例，用来接收具体的数据
                 T instance = clazz.newInstance();
+                //获取表对象的类属性字段，对应数据库中的表字段
                 Field[] fields = clazz.getDeclaredFields();
                 for (Field field : fields) {
+                    //根据表字段获取对应的数据
                     Object val = resultSet.getObject(field.getName());
                     if (val instanceof BigInteger) {
                         long value = ((BigInteger) val).longValue();
@@ -107,7 +114,9 @@ public class QueryUserDemo {
                         field.set(instance, value);
                         continue;
                     }
+                    //由于类属性被封装为private，这里设置可访问权限
                     field.setAccessible(true);
+                    //instance添加数据
                     field.set(instance, val);
                 }
                 results.add(instance);

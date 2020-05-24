@@ -1,4 +1,6 @@
-package course.basic.assignment;
+package course.basic.assignment.day01_02;
+
+import course.basic.assignment.day01_02.ParseFile;
 
 /**
  * @author zzhg

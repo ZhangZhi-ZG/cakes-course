@@ -1,6 +1,7 @@
-package course.basic.assignment;
+package course.basic.assignment.day01_02;
 
-import java.lang.reflect.Array;
+import course.basic.assignment.day01_02.Order;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

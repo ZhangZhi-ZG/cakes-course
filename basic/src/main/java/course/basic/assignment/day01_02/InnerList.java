@@ -1,4 +1,4 @@
-package course.basic.assignment;
+package course.basic.assignment.day01_02;
 
 import java.util.ArrayList;
 import java.util.List;

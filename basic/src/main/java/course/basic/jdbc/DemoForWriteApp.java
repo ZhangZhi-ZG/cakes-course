@@ -39,6 +39,8 @@ public class DemoForWriteApp {
         List<Object> params = Lists.newArrayList();
         params.add("xixihaha");
         params.add(34);
+
+
         int rows = DemoForWrite.modify(sql, params);
         System.out.println("rows = " + rows);
     }
