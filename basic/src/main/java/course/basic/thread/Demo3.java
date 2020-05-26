@@ -1,5 +1,9 @@
 package course.basic.thread;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 public class Demo3 {
 
     public static void main(String[] args) {
@@ -13,7 +17,7 @@ public class Demo3 {
         Thread thread = new Thread(runnable);
 
         thread.start();
-        thread.setName("test");
+        thread.setName("test"+  LocalDateTime.now(Clock.system(ZoneId.of("Asia/Shanghai"))));
         thread.interrupt();
 
     }

@@ -11,4 +11,5 @@ include 'kafka'
 include 'auto-test-framework'
 include 'mock-server'
 include 'assignment'
+include 'patterns'
 

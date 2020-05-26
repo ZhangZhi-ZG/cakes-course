@@ -13,7 +13,7 @@ import java.util.List;
 public class myConn {
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
     private static final String USERNAME = "root";
-    public static final String PASSWD = "123456";
+    private static final String PASSWD = "123456";
 
     public void updateData(String sql, List<Object> params){
         Connection conn = null;

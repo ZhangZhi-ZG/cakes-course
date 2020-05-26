@@ -12,6 +12,7 @@ public class Demo5 {
         startThread(new HttpRequestTask());
     }
 
+    //创建线程
     public static void startThread(Runnable runnable) {
         // 池化
         Thread thread = new Thread(runnable);
@@ -19,6 +20,7 @@ public class Demo5 {
         thread.start();
     }
 
+    //任务实现
     static class ReadFileTask implements Runnable {
 
         @Override
