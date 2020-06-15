@@ -1,8 +1,8 @@
 package course.patterns.builder;
 
-//import lombok.Builder;
+import lombok.Builder;
 //
-//@Builder
+@Builder
 public class User2 {
     private String name;
     private Integer age;

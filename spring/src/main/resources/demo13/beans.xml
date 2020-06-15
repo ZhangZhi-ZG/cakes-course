@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean配置  -->
+    <bean id="heheService" class="course.spring.demo2.HeheServiceImpl">
+        <property name="name" value="张三"/>
+        <property name="foo1Service" ref="foo2"/>
+    </bean>
+
+    <bean id="BWM" class="course.spring.demo13.Impl.BWM">
+    </bean>
+
+    <bean id="foo2" class="course.spring.demo2.Foo1ServiceImpl11111">
+    </bean>
+
+
+    <bean id="foo" class="course.spring.demo13.Foo">
+        <property name="name" value="zzhg"/>
+        <property name="age" value="25"/>
+
+        <property name="map">
+            <map>
+                <entry key="name" value="11"/>
+                <entry key="age" value="25"/>
+            </map>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>name</value>
+                <value>age</value>
+                <value>sex</value>
+            </list>
+        </property>
+
+        <property name="userDemo13" ref="user"/>
+
+        <property name="date">
+            <value></value>
+        </property>
+    </bean>
+
+    <bean id="user" class="course.spring.demo13.UserDemo13">
+        <property name="name" value="zzhg"/>
+        <property name="age" value="28"/>
+        <property name="sex" value="男"/>
+    </bean>
+</beans>

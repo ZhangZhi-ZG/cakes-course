@@ -3,6 +3,7 @@ package course.java8.stream;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +28,18 @@ public class Demo6 {
         // testPartitioningBy(strs);
 
         testJoining(strs);
+
+       // testCollectToList(strs);
+    }
+
+    private static void testCollectToList(List<String> strs) {
+        List<String> stringList = strs.stream()
+                .filter(str -> !Strings.isNullOrEmpty(str))
+                .map(String::toLowerCase)
+                .sorted(Comparator.comparingInt(String::length))
+                .distinct()
+                .collect(Collectors.toList());
+        System.out.println("stringList = " + stringList);
     }
 
     private static void testJoining(List<String> strs) {
@@ -81,4 +94,6 @@ public class Demo6 {
                 .collect(Collectors.toSet());
         System.out.println("data = " + data);
     }
+
+
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 public class Demo5 {
     public static void main(String[] args) {
         Optional<String> op1 = testOp("");
+        System.out.println("op1 = " + op1.orElse("null"));
         // 比较挫
         // if (op1.isPresent()) {
         //     String val = op1.get();

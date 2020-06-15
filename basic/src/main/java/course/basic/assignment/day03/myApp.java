@@ -13,9 +13,9 @@ public class myApp {
         List<List<Object>> params = pf.readFile();
 
         String sql = "insert into tb_user(`name`,`age`) values(?,?)";
-        myConn conn = new myConn();
+        myConn of = myConn.of();
         for (List<Object> param : params) {
-            conn.updateData(sql,param);
+            of.updateData(sql,param);
         }
 
 

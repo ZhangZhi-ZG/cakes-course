@@ -19,6 +19,7 @@ public final class Animalfactory2 {
     public Optional<Animal> createAnimal(String pkgName) {
         try {
             Class<?> clazz = Class.forName(pkgName);
+
             return Optional.of((Animal) clazz.newInstance());
         } catch (ClassNotFoundException e) {
             System.out.println("不存在的类");

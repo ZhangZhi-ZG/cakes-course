@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean配置  -->
+    <bean id="heheService" class="course.spring.demo2.HeheServiceImpl">
+        <!-- 依赖注入-->
+        <!--方法属性注入-->
+        <property name="name" value="张三"/>
+        <!--方法注入-->
+        <property name="foo1Service" ref="foo2"/>
+    </bean>
+
+    <bean id="foo1" class="course.spring.demo2.Foo1ServiceImpl">
+    </bean>
+
+    <bean id="foo2" class="course.spring.demo2.Foo1ServiceImpl11111">
+    </bean>
+
+    <bean id="foo2Service" class="course.spring.demo2.Foo2ServiceImpl">
+    </bean>
+
+    <bean id="foo3Service" class="course.spring.demo2.Foo3ServiceImpl">
+    </bean>
+</beans>

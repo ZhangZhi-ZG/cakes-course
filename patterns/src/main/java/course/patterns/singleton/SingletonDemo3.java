@@ -16,10 +16,4 @@ public final class SingletonDemo3 {
     public static SingletonDemo3 of() {
         return ClassHolder.INSTANCE;
     }
-
-    
-    // public static void main(String[] args) {
-    //     SingletonDemo3.of()
-    // }
-
 }
