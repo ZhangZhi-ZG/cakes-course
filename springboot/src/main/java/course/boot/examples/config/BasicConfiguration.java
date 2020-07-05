@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration // ==> beans.xml
 @ServletComponentScan(basePackages = "course.boot.examples.component")
-@EnableScheduling
+// @EnableScheduling  //开启定时任务
 public class BasicConfiguration implements WebMvcConfigurer {
 
     @Bean
@@ -28,6 +28,6 @@ public class BasicConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration registration = registry.addInterceptor(new LoginInterceptor());
-        registration.addPathPatterns("/**");
+        registration.addPathPatterns("/examples/pay/*");
     }
 }

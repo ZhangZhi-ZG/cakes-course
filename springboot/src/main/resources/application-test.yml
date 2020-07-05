@@ -1,0 +1,18 @@
+spring:
+  profiles: test
+
+server:
+  port: 9002
+  servlet:
+    context-path: /examples
+  tomcat:
+    connection-timeout: 500
+    max-connections: 256
+    max-threads: 128
+
+pay:
+  order-id: '222222'
+  pay-id: '2222222'
+  amount: 20
+
+

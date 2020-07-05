@@ -12,4 +12,7 @@ include 'auto-test-framework'
 include 'mock-server'
 include 'assignment'
 include 'patterns'
+include 'springboot-mybatis'
+include 'mybatis-xml'
+include 'mybatis-annotation'
 

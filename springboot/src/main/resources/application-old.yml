@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /examples
+  tomcat:
+    connection-timeout: 500
+    max-connections: 256
+    max-threads: 128
+
+pay:
+  order-id: '56789'
+  pay-id: '9876543'
+  amount: 4096
+
