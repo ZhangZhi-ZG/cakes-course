@@ -4,6 +4,7 @@ import course.boot.examples.service.IOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * author: xiha
  * crate time: 2020/6/21
  */
+//与Controller相比，RestController会返回处理后的响应结果，不需要我们自己对响应结果进行处理
 @RestController
 @RequestMapping("/order")
 public class OrderController {

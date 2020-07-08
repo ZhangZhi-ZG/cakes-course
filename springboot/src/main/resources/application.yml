@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: jdbc
+
+---
+spring:
+  profiles: devvvvv
+
+server:
+  port: 8888
+  servlet:
+    context-path: /examples
+  tomcat:
+    connection-timeout: 500
+    max-connections: 256
+    max-threads: 128
+
+pay:
+  order-id: '1234'
+  pay-id: '9876543'
+  amount: 4096
+
+---
+
+spring:
+  profiles: testttttt
+
+server:
+  port: 9999
+  servlet:
+    context-path: /examples
+  tomcat:
+    connection-timeout: 500
+    max-connections: 256
+    max-threads: 128
+
+pay:
+  order-id: '5678'
+  pay-id: '9876543'
+  amount: 4096

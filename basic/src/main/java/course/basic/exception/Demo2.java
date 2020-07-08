@@ -19,7 +19,7 @@ public class Demo2 {
          *
          * }
          *
-         * jdk1.7新特性
+         * jdk1.8新特性
          * try(){
          *
          * }catch(XxxException e){

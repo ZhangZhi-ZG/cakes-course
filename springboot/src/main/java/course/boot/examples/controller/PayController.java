@@ -34,6 +34,9 @@ public class PayController {
     }
 
     @RequestMapping("pay2")
+    /**
+     * RequestParam: required=“True”代表该参数为必传
+     */
     public String pay2(@RequestParam(value = "payId", required = true) String payId) {
 
         LOGGER.info("pay2 start. payId={}", payId);

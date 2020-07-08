@@ -1,0 +1,4 @@
+dependencies {
+    implementation('org.mybatis:mybatis:3.5.5')
+    implementation('mysql:mysql-connector-java:8.0.20')
+}

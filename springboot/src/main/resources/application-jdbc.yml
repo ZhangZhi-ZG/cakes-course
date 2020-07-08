@@ -1,0 +1,16 @@
+server:
+  port: 8989
+
+pay:
+  order-id: '1111111'
+  pay-id: '1111111'
+  amount: 10
+
+# 配置jdbc
+spring:
+  profiles: jdbc
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/course
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver

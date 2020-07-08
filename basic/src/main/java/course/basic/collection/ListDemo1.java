@@ -32,7 +32,7 @@ public class ListDemo1 {
 
         System.out.println("newList = " + newList);
         list.subList(0,1);
-        String[] strArr = list.toArray(new String[2]);
+        String[] strArr = list.toArray(new String[]{"0"});
         for (String s : strArr) {
             System.out.println("s = " + s);
         }
@@ -52,6 +52,7 @@ public class ListDemo1 {
         list1.add("c");
         //根据索引获取元素
         String s = list1.get(1);
+
         System.out.println(s);
 
         boolean isEmp2 = list1.isEmpty();

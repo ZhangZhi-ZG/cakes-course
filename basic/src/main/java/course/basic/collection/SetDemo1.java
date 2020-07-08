@@ -1,6 +1,5 @@
 package course.basic.collection;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import java.util.HashSet;
@@ -16,7 +15,7 @@ public class SetDemo1 {
     test2();
   }
 
-  public static void test2() {
+  private static void test2() {
     Set<String> set1 = new HashSet<>();
     set1.add("a");
     set1.add("b");

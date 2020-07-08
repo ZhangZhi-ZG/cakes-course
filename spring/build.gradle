@@ -3,6 +3,8 @@ dependencies {
     compile('org.springframework:spring-core:4.3.27.RELEASE')
     compile('org.springframework:spring-beans:4.3.27.RELEASE')
 
+    compile('com.google.guava:guava:29.0-jre')
+
     // aop需要
     compile('org.springframework:spring-aop:4.3.27.RELEASE')
     compile('org.springframework:spring-aspects:4.3.27.RELEASE')

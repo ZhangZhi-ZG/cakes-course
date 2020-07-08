@@ -13,5 +13,8 @@ public final class SingletonLiveTemplate {
         return ClassHolder.INSTANCE;
     }
 
+    public static void main(String[] args) {
+        SingletonLiveTemplate template = SingletonLiveTemplate.of();
 
+    }
 }

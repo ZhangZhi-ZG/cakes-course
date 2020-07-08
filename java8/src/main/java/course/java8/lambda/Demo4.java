@@ -25,16 +25,32 @@ public class Demo4 {
     }
 
     private static void testPredicate() {
-        Predicate<Integer> predicate = num -> num > 1024;
+
+//        Predicate<Integer> predicate = num -> num > 1024;
+        Predicate<Integer> predicate = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer > 1024;
+            }
+        };
         predicate.test(2048);
         predicate.test(1000);
 
         LongPredicate longPredicate = l -> l > 2048;
-        longPredicate.test(1024);
+        boolean test = longPredicate.test(1024);
+        System.out.println("test = " + test);
+
     }
 
     private static void testSupplier() {
-        Supplier<LocalDateTime> supplier = () -> LocalDateTime.now();
+
+        Supplier<LocalDateTime> supplier1 = new Supplier<LocalDateTime>() {
+            @Override
+            public LocalDateTime get() {
+                return LocalDateTime.now();
+            }
+        };
+        Supplier<LocalDateTime> supplier = LocalDateTime::now;
 
         LocalDateTime dateTime = supplier.get();
 
@@ -42,6 +58,7 @@ public class Demo4 {
     }
 
     private static void testConsumer() {
+
         Consumer<String> consumer = str -> {
             int length = str.length();
             System.out.println("length = " + length);
@@ -50,9 +67,17 @@ public class Demo4 {
         consumer.accept("hello java8 lambda");
     }
 
+
     public static void testFunction() {
         // R apply(T t);
-        Function<String, String> func = str -> str.toUpperCase();
+        //匿名函数实现
+        Function<String, Integer> function = new Function<String, Integer>() {
+            @Override
+            public Integer apply(String s) {
+                return s.length();
+            }
+        };
+        Function<String, String> func = String::toUpperCase;
         String funcResp = func.apply("hello world");
         System.out.println("funcResp = " + funcResp);
 

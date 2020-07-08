@@ -29,8 +29,12 @@ public class Demo3 {
     // == 与 equals的区别
     Integer i1 = 1024;
     Integer i2 = 1024;
-    if (i1 == i2) {
 
+    if (i1 == 1024) System.out.println("Demo3.main");
+    else if (i1.equals(i2)){
+      System.out.println("test");
+    }else{
+      System.out.println("finally");
     }
 
     // && 所有表达式都为true,结果才为true

@@ -3,6 +3,7 @@ package course.spring.demo13;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,8 @@ import java.util.ArrayList;
  * @date 2020-06-09
  */
 public class App {
-    String name;
+
+
 
     public static void main(String[] args) {
         // foo1();

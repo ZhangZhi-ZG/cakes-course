@@ -26,8 +26,8 @@ public class IODemo1 {
     bufferedReader1();
   }
 
-  public static void bufferedReader1() {
-    String filePath = "/Users/haoc/course/code/cakes-course/0.notes/day01.md";
+  private static void bufferedReader1() {
+    String filePath = "D:\\workspace\\cakes-course\\0.notes\\day01.md";
     File file = new File(filePath);
     BufferedReader reader = null;
     try {

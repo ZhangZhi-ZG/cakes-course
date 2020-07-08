@@ -1,36 +1,46 @@
-allprojects {
-    group 'course'
-    version '1.0.0-SNAPSHOT'
-    buildDir = 'target'
+allprojects { // 整体工程配置
+    group 'course'  // jar包管理的group name,与maven一致, maven中的artifactId就是本项目的名字
+    version '1.0.0-SNAPSHOT' // 与maven的version一致
+    buildDir = 'target' // 构建后的包名
 
-    apply plugin: 'idea'
-    apply plugin: 'maven'
+    apply plugin: 'idea'  // 引入插件
+    apply plugin: 'maven' // 引入插件
 }
 
-subprojects {
-    apply plugin: 'java'
+subprojects {  // 子工程配置项
+    apply plugin: 'java' // 引入插件,不要放到allprojects作用域里，否则每次刷新时会自建src目录,烦人
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 1.8 // 编码变异的jdk版本指定为1.8
+    targetCompatibility = 1.8 // 目标版本 jdk版本指定为1.8
 
-    repositories {
-        mavenLocal()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        mavenCentral()
+    repositories { // 仓库引用配置
+        mavenLocal() // 先加载本地maven仓库
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }  // 自定义要下载jar包地址
+        mavenCentral() // 从maven中央仓库获取
     }
 
-    idea {
-        module {
-            downloadSources = true
-            downloadJavadoc = false
-            sourceDirs += file('src/main/resources')
+    ext { // 自定义参数
+        springBootVersion = '2.2.2.RELEASE'
+        guavaVersion = '29.0-jre'
+    }
+
+    idea { // idea插件配置
+        module { // 模块 配置
+            downloadSources = true  // 下载源码?
+            downloadJavadoc = false // 下载java文档?
+            sourceDirs += file('src/main/resources') // 资源目录
         }
     }
 
-    configurations {
+    configurations { // 配置节点
 
     }
 
-    dependencies {
+    dependencies { // 依赖添加节点,各种jar包的引入就是在此配置
+        implementation("com.google.guava:guava:$guavaVersion")
+        compileOnly('org.projectlombok:lombok:1.18.10')
+        annotationProcessor('org.projectlombok:lombok:1.18.10')
+        implementation('junit:junit:4.13')
+        implementation("org.apache.commons:commons-lang3:3.10")
     }
 }
