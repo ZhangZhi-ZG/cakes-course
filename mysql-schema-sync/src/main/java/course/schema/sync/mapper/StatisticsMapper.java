@@ -13,6 +13,6 @@ import java.util.Set;
  */
 public interface StatisticsMapper extends BaseMapper {
 
-    @Select("SELECT `table_schema`,`table_name`,`index_name`,`seq_in_index`,`column_name` FROM `information_schema`.`statistics` WHERE `table_schema`=#{tableSchema} AND `table_name`=#{tableName}")
+    @Select("SELECT `table_schema`,`table_name`,`index_name`,`seq_in_index`,`column_name`,`non_unique` FROM `information_schema`.`statistics` WHERE `table_schema`=#{tableSchema} AND `table_name`=#{tableName}")
     Set<StatisticsDO> selectByTable(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
 }
