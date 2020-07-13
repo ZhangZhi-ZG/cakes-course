@@ -1,5 +1,6 @@
 package course.schema.sync.model;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
@@ -14,6 +15,8 @@ public class ColumnsDO {
     private String dataType;
     private String columnDefault;
     private String isNullable;
+    private String columnComment;
+    private boolean isAdd;
 
     public String getTableSchema() {
         return tableSchema;
@@ -71,6 +74,22 @@ public class ColumnsDO {
         this.isNullable = isNullable;
     }
 
+    public String getColumnComment() {
+        return columnComment;
+    }
+
+    public void setColumnComment(String columnComment) {
+        this.columnComment = columnComment;
+    }
+
+    public boolean isAdd() {
+        return isAdd;
+    }
+
+    public void setAdd(boolean add) {
+        isAdd = add;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,24 +101,27 @@ public class ColumnsDO {
                 Objects.equal(columnType, columnsDO.columnType) &&
                 Objects.equal(dataType, columnsDO.dataType) &&
                 Objects.equal(columnDefault, columnsDO.columnDefault) &&
-                Objects.equal(isNullable, columnsDO.isNullable);
+                Objects.equal(isNullable, columnsDO.isNullable) &&
+                Objects.equal(columnComment, columnsDO.columnComment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(tableSchema, tableName, columnName, columnType, dataType, columnDefault, isNullable);
+        return Objects.hashCode(tableSchema, tableName, columnName, columnType, dataType, columnDefault, isNullable, columnComment);
     }
 
     @Override
     public String toString() {
-        return "ColumnsDO{" +
-                "tableSchema='" + tableSchema + '\'' +
-                ", tableName='" + tableName + '\'' +
-                ", columnName='" + columnName + '\'' +
-                ", columnType='" + columnType + '\'' +
-                ", dataType='" + dataType + '\'' +
-                ", columnDefault='" + columnDefault + '\'' +
-                ", isNullable='" + isNullable + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("tableSchema", tableSchema)
+                .add("tableName", tableName)
+                .add("columnName", columnName)
+                .add("columnType", columnType)
+                .add("dataType", dataType)
+                .add("columnDefault", columnDefault)
+                .add("isNullable", isNullable)
+                .add("columnComment", columnComment)
+                .add("isAdd", isAdd)
+                .toString();
     }
 }

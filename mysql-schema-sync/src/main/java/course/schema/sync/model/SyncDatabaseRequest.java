@@ -7,7 +7,6 @@ import course.schema.sync.util.VerifyUtils;
  * crate time: 2020/7/5
  */
 public class SyncDatabaseRequest {
-
     private ConnectInfo srcConnectInfo;
 
     private ConnectInfo dstConnectInfo;
