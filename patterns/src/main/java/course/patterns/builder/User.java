@@ -61,22 +61,46 @@ public class User {
         return name;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     public Integer getAge() {
         return age;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     public String getInfo() {
         return info;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     public String getPassword() {
         return password;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     public String getBalance() {
         return balance;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     @Override
     public String toString() {
         return "User{" +

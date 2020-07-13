@@ -45,6 +45,7 @@ public class PayController {
     }
 
     @RequestMapping("pay3")
+    //RequestParam注解-规定哪些参数是必传的,defaultValue可以设置参数默认值
     public String pay3(@RequestParam(value = "payId", required = false, defaultValue = "hahahah-12345") String payId) {
 
         LOGGER.info("pay3 start. payId={}", payId);
@@ -61,6 +62,7 @@ public class PayController {
     }
 
     // @ResponseBody  使用@RestController标识后，此注解可省略
+    //method-请求方法，consumes-请求的文本类型
     @RequestMapping(value = "pay5", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public RetMsg pay5(@RequestBody PayInfo payInfo) {
         LOGGER.info("pay5 start. payInfo={}", payInfo);

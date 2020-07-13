@@ -16,4 +16,5 @@ include 'leetcode'
 include 'mybatis-xml'
 include 'mybatis-annotation'
 include 'springboot-mybatis'
+include 'mybatis-annotation'
 

@@ -1,6 +1,10 @@
 spring:
   profiles:
+<<<<<<< HEAD
     active: jdbc
+=======
+    active: dev
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
 
 ---
 spring:

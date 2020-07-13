@@ -10,7 +10,14 @@ pay:
 spring:
   profiles: jdbc
   datasource:
+<<<<<<< HEAD
     url: jdbc:mysql://127.0.0.1:3306/course
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+=======
+    url: jdbc:mysql://127.0.0.1:3306/learn
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998

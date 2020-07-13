@@ -18,13 +18,26 @@ import java.util.List;
 public class AppForSelectByUserId {
 
     public static void main(String[] args) throws IOException {
+
+//        InputStream ins = Resources.getResource(MyBatisConst.CONFIG_FILE_NAME).openStream();
+//        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(ins);
+//        SqlSession session = factory.openSession(true);
+//        TbUserMapper tbUserMapper = session.getMapper(TbUserMapper.class);
+//        List<TbUser> users = tbUserMapper.selectByUserId("1000001");
+//        users.forEach(u -> System.out.println("u = " + u));
+
+
+        //1. 获取mybatis总配置文件
         InputStream ins = Resources.getResource(MyBatisConst.CONFIG_FILE_NAME).openStream();
+        //2. 创建factory
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(ins);
         SqlSession session = factory.openSession(true);
+        //3. 获取mapper
         TbUserMapper tbUserMapper = session.getMapper(TbUserMapper.class);
+        //4. 进行相关的数据库增删改查操作
         List<TbUser> users = tbUserMapper.selectByUserId("1000001");
         users.forEach(u -> System.out.println("u = " + u));
-
+        //5. 关闭session资源
         session.close();
     }
 }

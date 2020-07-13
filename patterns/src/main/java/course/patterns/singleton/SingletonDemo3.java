@@ -4,7 +4,6 @@ package course.patterns.singleton;
  * 使用内部类,推荐
  */
 public final class SingletonDemo3 {
-
     private SingletonDemo3() {
 
     }
@@ -16,4 +15,6 @@ public final class SingletonDemo3 {
     public static SingletonDemo3 of() {
         return ClassHolder.INSTANCE;
     }
+
+
 }

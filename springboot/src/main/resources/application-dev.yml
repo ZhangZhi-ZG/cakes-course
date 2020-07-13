@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spring:
   profiles: dev
 
@@ -5,13 +6,41 @@ server:
   port: 8001
   servlet:
     context-path: /examples
+=======
+#当前环境别名
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/learn
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  #tomcat端口号
+  port: 8001
+  servlet:
+    #context-path
+    context-path: /examples
+  #tomcat配置项
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
   tomcat:
     connection-timeout: 500
     max-connections: 256
     max-threads: 128
 
+<<<<<<< HEAD
+=======
+dd:
+  name: "zhangsan"
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
 pay:
   order-id: '1111111'
   pay-id: '1111111'
   amount: 10
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998

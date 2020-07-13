@@ -3,6 +3,7 @@ package course.patterns.builder;
 public class User2App {
     public static void main(String[] args) {
 
+<<<<<<< HEAD
 
 //        User2.User2Builder info = User2.builder()
 //                .age(22)
@@ -10,5 +11,17 @@ public class User2App {
 //                .balance("113123")
 //                .info("male");
 //        System.out.println("info.toString() = " + info.toString());
+=======
+        // User2.User2Builder info1 = User2.builder()
+        //         .age(22)
+        //         .name("zhang san")
+        //         .balance("113123")
+        //         .password("1235")
+        //         .info("male");
+
+
+
+        // System.out.println("info.toString() = " + info1.toString());
+>>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     }
 }
