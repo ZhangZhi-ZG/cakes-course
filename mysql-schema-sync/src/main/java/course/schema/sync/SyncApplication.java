@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * crate time: 2020/7/5
  */
 @SpringBootApplication
-@EnableScheduling
+// @EnableScheduling
 public class SyncApplication {
 
     public static void main(String[] args) {

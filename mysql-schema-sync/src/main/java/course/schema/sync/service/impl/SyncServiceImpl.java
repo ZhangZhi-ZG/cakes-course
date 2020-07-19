@@ -38,7 +38,7 @@ public class SyncServiceImpl implements SyncService {
         syncColumns(syncInfo);
 
         // 同步索引
-        syncStatistics(syncInfo);
+        // syncStatistics(syncInfo);
     }
 
     private void syncStatistics(SyncTableRequest syncInfo) {
@@ -122,6 +122,7 @@ public class SyncServiceImpl implements SyncService {
 
         return Sets.difference(srcColumns, dstColumns)
                 .stream()
+                // 在进行列字段的diff比较之前，将需要插入的字段进行单独标记
                 .peek(column -> checkAddFlag(diffColumnName, column))
                 .distinct()
                 .collect(Collectors.toList());

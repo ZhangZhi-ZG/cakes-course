@@ -5,9 +5,7 @@ import course.schema.sync.service.SyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * author: xiha
@@ -23,7 +21,7 @@ public class SyncController {
     private SyncService syncService;
 
     @RequestMapping("/instance")
-    public RetMsg doSyncInstance(@RequestParam SyncInstanceRequest syncRequest) {
+    public RetMsg doSyncInstance(@RequestBody SyncInstanceRequest syncRequest) {
         LOGGER.info("do sync start. syncInfo = {}", syncRequest);
 
         try {
@@ -39,7 +37,7 @@ public class SyncController {
     }
 
     @RequestMapping("/database")
-    public RetMsg doSyncDatabase(@RequestParam SyncDatabaseRequest syncRequest) {
+    public RetMsg doSyncDatabase(@RequestBody SyncDatabaseRequest syncRequest) {
         LOGGER.info("do sync start. syncInfo = {}", syncRequest);
 
         try {
@@ -55,7 +53,7 @@ public class SyncController {
     }
 
     @RequestMapping("/table")
-    public RetMsg doSyncTable(@RequestParam SyncTableRequest syncRequest) {
+    public RetMsg doSyncTable(@RequestBody SyncTableRequest syncRequest) {
         LOGGER.info("do sync start. syncInfo = {}", syncRequest);
 
         try {

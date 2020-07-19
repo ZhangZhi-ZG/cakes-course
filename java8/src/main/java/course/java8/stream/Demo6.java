@@ -25,9 +25,9 @@ public class Demo6 {
 
         // testGroupBy(strs);
 
-        // testPartitioningBy(strs);
+        testPartitioningBy(strs);
 
-        testJoining(strs);
+        // testJoining(strs);
 
        // testCollectToList(strs);
     }

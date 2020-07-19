@@ -18,4 +18,6 @@ public interface ColumnsMapper extends BaseMapper {
 
     @Select("SELECT `table_schema`,`table_name`,`column_name`,`column_type`,`data_type`,`column_default`,`is_nullable`,`column_comment` FROM `information_schema`.`columns` WHERE `table_schema` = #{tableSchema} AND `table_name` = #{tableName}")
     Set<ColumnsDO> selectByTable(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
+
+
 }

@@ -26,18 +26,18 @@ public class TestSyncTable {
         SyncTableRequest request = new SyncTableRequest();
 
         ConnectInfo src = new ConnectInfo();
-        src.setUrl("jdbc:mysql://127.0.0.1:3306");
+        src.setUrl("jdbc:mysql://139.219.4.19:3306");
         src.setUserName("root");
         src.setPassword("123456");
         request.setSrcConnectInfo(src);
 
         ConnectInfo dst = new ConnectInfo();
-        dst.setUrl("jdbc:mysql://127.0.0.1:3388");
+        dst.setUrl("jdbc:mysql://139.219.4.19:3307");
         dst.setUserName("root");
         dst.setPassword("123456");
         request.setDstConnectInfo(dst);
 
-        request.setDatabaseName("course");
+        request.setDatabaseName("zzhg");
         request.setTableName("tb_user");
 
         new SyncServiceImpl().syncTable(request);
