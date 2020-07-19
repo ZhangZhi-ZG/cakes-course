@@ -27,16 +27,16 @@ public class SchemaSyncTask {
         // 3.循环处理
         // for List<SyncTableDO> == > SyncTableRequest
         // for syncService.syncTable(new SyncTableRequest());
-        syncService.syncTable(new SyncTableRequest());
+//        syncService.syncTable(new SyncTableRequest());
     }
 
     @Scheduled(cron = "*/30 * * * * *")
     public void doSyncDatabase() {
-        syncService.syncDatabase(new SyncDatabaseRequest());
+//        syncService.syncDatabase(new SyncDatabaseRequest());
     }
 
     @Scheduled(cron = "*/30 * * * * *")
     public void doSyncInstance() {
-        syncService.syncInstance(new SyncInstanceRequest());
+//        syncService.syncInstance(new SyncInstanceRequest());
     }
 }

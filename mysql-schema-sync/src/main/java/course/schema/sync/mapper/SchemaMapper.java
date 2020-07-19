@@ -3,7 +3,6 @@ package course.schema.sync.mapper;
 import course.schema.sync.model.SchemaDO;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
 import java.util.Set;
 
 /**

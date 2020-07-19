@@ -60,4 +60,17 @@ public class TestDao {
         }
     }
 
+    @Test
+    public void testExecSql() {
+        DaoFacade.execSql(connectInfo, "alter table course.tb_user modify column xyz varchar(450) not null default 'y' comment 'hahahah 12345 test';");
+    }
+
+    @Test
+    public void testShowCreateTable() {
+        String sql = DaoFacade.showCreateTable(connectInfo, "course", "tb_user");
+
+        System.out.println("sql = " + sql);
+    }
+
+
 }

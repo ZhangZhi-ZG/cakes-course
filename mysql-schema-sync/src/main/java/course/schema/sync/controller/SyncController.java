@@ -5,9 +5,8 @@ import course.schema.sync.service.SyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * author: xiha
@@ -22,14 +21,16 @@ public class SyncController {
     @Autowired
     private SyncService syncService;
 
-    @RequestMapping("/instance")
-    public RetMsg doSyncInstance(@RequestParam SyncInstanceRequest syncRequest) {
-        LOGGER.info("do sync start. syncInfo = {}", syncRequest);
+    @RequestMapping(value = "/instance", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public RetMsg doSyncInstance(@RequestBody SyncInstanceRequest syncInstanceRequest) {
+        LOGGER.info("do sync start. syncInfo = {}", syncInstanceRequest);
+
+        // send to redis.  // ==> 1000次。 1次 ==》 3-5分钟
 
         try {
-            syncRequest.verify();
+            syncInstanceRequest.verify();
 
-            syncService.syncInstance(syncRequest);
+            syncService.syncInstance(syncInstanceRequest);
 
             return RetMsg.buildSuccess();
         } catch (Exception e) {
@@ -39,7 +40,7 @@ public class SyncController {
     }
 
     @RequestMapping("/database")
-    public RetMsg doSyncDatabase(@RequestParam SyncDatabaseRequest syncRequest) {
+    public RetMsg doSyncDatabase(@RequestBody SyncDatabaseRequest syncRequest) {
         LOGGER.info("do sync start. syncInfo = {}", syncRequest);
 
         try {
@@ -55,7 +56,7 @@ public class SyncController {
     }
 
     @RequestMapping("/table")
-    public RetMsg doSyncTable(@RequestParam SyncTableRequest syncRequest) {
+    public RetMsg doSyncTable(@RequestBody SyncTableRequest syncRequest) {
         LOGGER.info("do sync start. syncInfo = {}", syncRequest);
 
         try {

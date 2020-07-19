@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -31,6 +32,33 @@ public final class DaoFacade {
         } catch (Exception e) {
             throw new IllegalStateException("exec mapper failed.", e);
         }
+    }
+
+    private static String showInfo(ConnectInfo connect, String sql, String columnName) {
+        try (SqlSession sqlSession = LocalSqlSessionFactory.of().getSqlSession(connect);
+             Connection connection = sqlSession.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                return resultSet.getString(columnName);
+            }
+
+            throw new IllegalStateException("get show info sql failed.");
+        } catch (Exception e) {
+            throw new IllegalStateException("show info exec failed.", e);
+        }
+    }
+
+    public static String showCreateDatabase(ConnectInfo connect, String tableSchema) {
+        String sql = String.format("show create database `%s`", tableSchema);
+        return showInfo(connect, sql, "Create Database");
+    }
+
+
+    public static String showCreateTable(ConnectInfo connect, String tableSchema, String tableName) {
+        String sql = String.format("show create table `%s`.`%s`", tableSchema, tableName);
+        return showInfo(connect, sql, "Create Table");
     }
 
     public static void execSql(ConnectInfo connect, String sql) {

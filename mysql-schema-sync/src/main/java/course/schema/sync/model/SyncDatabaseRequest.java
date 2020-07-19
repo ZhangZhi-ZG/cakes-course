@@ -2,6 +2,8 @@ package course.schema.sync.model;
 
 import course.schema.sync.util.VerifyUtils;
 
+import java.util.List;
+
 /**
  * author: xiha
  * crate time: 2020/7/5
@@ -11,9 +13,9 @@ public class SyncDatabaseRequest {
 
     private ConnectInfo dstConnectInfo;
 
-    private String instanceName;
-
     private String databaseName;
+
+    private List<String> excludeTables;
 
     public ConnectInfo getSrcConnectInfo() {
         return srcConnectInfo;
@@ -39,19 +41,18 @@ public class SyncDatabaseRequest {
         this.databaseName = databaseName;
     }
 
+    public List<String> getExcludeTables() {
+        return excludeTables;
+    }
+
+    public void setExcludeTables(List<String> excludeTables) {
+        this.excludeTables = excludeTables;
+    }
+
     public void verify() {
         this.srcConnectInfo.verify();
         this.dstConnectInfo.verify();
-        VerifyUtils.requiredNotNullOrEmpty(this.instanceName, "sync instance name should not be null or empty");
         VerifyUtils.requiredNotNullOrEmpty(this.databaseName, "sync database name should not be null or empty");
-    }
-
-    public String getInstanceName() {
-        return instanceName;
-    }
-
-    public void setInstanceName(String instanceName) {
-        this.instanceName = instanceName;
     }
 
     @Override
@@ -59,8 +60,8 @@ public class SyncDatabaseRequest {
         return "SyncDatabaseRequest{" +
                 "srcConnectInfo=" + srcConnectInfo +
                 ", dstConnectInfo=" + dstConnectInfo +
-                ", instanceName='" + instanceName + '\'' +
                 ", databaseName='" + databaseName + '\'' +
+                ", excludeTables='" + excludeTables + '\'' +
                 '}';
     }
 }
