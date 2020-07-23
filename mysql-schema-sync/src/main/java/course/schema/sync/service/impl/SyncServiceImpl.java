@@ -5,9 +5,12 @@ import com.google.common.collect.*;
 import course.schema.sync.consts.SqlFormatterConst;
 import course.schema.sync.dao.DaoFacade;
 import course.schema.sync.mapper.ColumnsMapper;
+import course.schema.sync.mapper.SchemaMapper;
 import course.schema.sync.mapper.StatisticsMapper;
+import course.schema.sync.mapper.TablesMapper;
 import course.schema.sync.model.*;
 import course.schema.sync.service.SyncService;
+import course.schema.sync.util.ListUtils;
 import course.schema.sync.util.SqlUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
@@ -22,15 +25,142 @@ import java.util.stream.Collectors;
 @Service
 public class SyncServiceImpl implements SyncService {
 
+    private static final List<String> MYSQL_SYS_DATABASES = Lists.newArrayList("mysql", "sys", "information_schema", "performance_schema");
+
     @Override
     public void syncInstance(SyncInstanceRequest syncInfo) {
+        ConnectInfo srcConnectInfo = syncInfo.getSrcConnectInfo();
+        ConnectInfo dstConnectInfo = syncInfo.getDstConnectInfo();
 
+        /**
+         * 思路: 拿到src和dst连接之后，首先做diff.
+         * src有的db, dst无 ==> 那就是 将这个db下面的所有表，全部同步至dst
+         * src有, dst有.  进入db，去做db内表的diff, syncDatabase(SyncDatabaseRequest)
+         * 注: 拿到的所有库，并不是都能进行做同步的，比如 mysql, sys, information_schema, performance_schema
+         */
+
+        // 拿到 src和dst中的所有库
+        Set<SchemaDO> srcSchemas = DaoFacade.ofMapper(srcConnectInfo, SchemaMapper.class, SchemaMapper::selectAllSchema);
+        Set<SchemaDO> dstSchemas = DaoFacade.ofMapper(dstConnectInfo, SchemaMapper.class, SchemaMapper::selectAllSchema);
+
+        // diff差异，src有， dst无 ==》 准备去创建的
+        Set<SchemaDO> prepareCreateDatabase = Sets.difference(srcSchemas, dstSchemas).immutableCopy();
+        createDatabase(srcConnectInfo, dstConnectInfo, prepareCreateDatabase, syncInfo.getExcludeDatabases());
+
+        // 交集，src有， dst有 ==》 准备去diff的
+        Set<SchemaDO> prepareDiffDatabase = Sets.intersection(srcSchemas, dstSchemas).immutableCopy();
+        diffDatabase(srcConnectInfo, dstConnectInfo, prepareDiffDatabase, syncInfo.getExcludeDatabases());
     }
+
+    private void diffDatabase(ConnectInfo srcConnectInfo, ConnectInfo dstConnectInfo, Set<SchemaDO> prepareDiffDatabase, List<String> excludeDatabases) {
+        prepareDiffDatabase.parallelStream()
+                .filter(db -> !MYSQL_SYS_DATABASES.contains(db.getSchemaName()))
+                .filter(db -> !ListUtils.isContains(excludeDatabases, db.getSchemaName()))
+                .forEach(db -> {
+                    SyncDatabaseRequest request = new SyncDatabaseRequest();
+                    request.setSrcConnectInfo(srcConnectInfo);
+                    request.setDstConnectInfo(dstConnectInfo);
+                    request.setDatabaseName(db.getSchemaName());
+                    syncDatabase(request);
+                });
+    }
+
+    private void createDatabase(ConnectInfo srcConnectInfo, ConnectInfo dstConnectInfo, Set<SchemaDO> prepareCreateDatabase, List<String> excludeDatabases) {
+        prepareCreateDatabase.parallelStream()
+                .filter(db -> !MYSQL_SYS_DATABASES.contains(db.getSchemaName()))
+                .filter(db -> !ListUtils.isContains(excludeDatabases, db.getSchemaName()))
+                .forEach(db -> {
+                    // 首先要去创建db, 因为这个是 src有, dst无。
+                    String createDatabaseSql = DaoFacade.showCreateDatabase(srcConnectInfo, db.getSchemaName());
+
+                    // 去dst种创建库
+                    DaoFacade.execSql(dstConnectInfo, createDatabaseSql);
+
+                    // 获取src当中所有此db下面的所有表的建表语句。
+                    Set<TablesDO> prepareCreateTables = DaoFacade.ofMapper(srcConnectInfo, TablesMapper.class,
+                            mapper -> mapper.selectByTableSchema(db.getSchemaName()));
+
+                    // 获取src种 指定db下面的所有表的 建表语句
+                    List<String> createTableSqlList = prepareCreateTables
+                            .parallelStream()
+                            .map(table -> DaoFacade.showCreateTable(srcConnectInfo, db.getSchemaName(), table.getTableName()))
+                            .collect(Collectors.toList());
+
+                    // 在去完成 表的创建
+                    String useDBSql = String.format("use %s;", db.getSchemaName());
+
+                    List<String> sqlList = Lists.newArrayList();
+                    sqlList.add(useDBSql);
+                    sqlList.addAll(createTableSqlList);
+                    DaoFacade.execBatchSql(dstConnectInfo, sqlList);
+                });
+    }
+
+    // ------------------------------------  sync database ------------------------------------
 
     @Override
     public void syncDatabase(SyncDatabaseRequest syncInfo) {
+        ConnectInfo srcConnectInfo = syncInfo.getSrcConnectInfo();
+        ConnectInfo dstConnectInfo = syncInfo.getDstConnectInfo();
 
+        String databaseName = syncInfo.getDatabaseName();
+
+        // 同步的是数据库,一个数据库下面会有很多表，这个时候的同步也就是同步这些所有的表
+        // src: 获取src下面指定库的所有表。dst: 获取源指定库下面的所有表
+        // diff, 如果src有, dst没有 ==> 那么这些表就是要去 全新生成的
+        // diff, 如果src有, dst也有 ==> 那么这个就是去diff每个表  ===》 syncTable(SyncTableRequest)
+
+        Set<TablesDO> srcTables = DaoFacade
+                .ofMapper(srcConnectInfo, TablesMapper.class, mapper -> mapper.selectByTableSchema(databaseName));
+
+        Set<TablesDO> dstTables = DaoFacade
+                .ofMapper(dstConnectInfo, TablesMapper.class, mapper -> mapper.selectByTableSchema(databaseName));
+
+        // src有, dst无 ==> 去新建表,从src中捞出 这些表的建表语句，然后去dst种执行
+        ImmutableSet<TablesDO> prepareCreateTables = Sets.difference(srcTables, dstTables).immutableCopy();
+        createTables(srcConnectInfo, dstConnectInfo, prepareCreateTables, syncInfo.getExcludeTables());
+
+        // src有, dst有 ==》 此时就是去diff每个表的字段和索引是否有差异
+        ImmutableSet<TablesDO> prepareDiffTables = Sets.intersection(srcTables, dstTables).immutableCopy();
+        diffTables(srcConnectInfo, dstConnectInfo, prepareDiffTables, syncInfo.getExcludeTables());
     }
+
+    private void diffTables(ConnectInfo srcConnectInfo, ConnectInfo dstConnectInfo, ImmutableSet<TablesDO> prepareDiffTables,
+                            List<String> excludeTables) {
+        prepareDiffTables
+                .parallelStream()
+                .filter(table -> !ListUtils.isContains(excludeTables, table.getTableName()))
+                .forEach(table -> {
+                    SyncTableRequest request = new SyncTableRequest();
+                    request.setSrcConnectInfo(srcConnectInfo);
+                    request.setDstConnectInfo(dstConnectInfo);
+                    request.setDatabaseName(table.getTableSchema());
+                    request.setTableName(table.getTableName());
+                    syncTable(request);
+                });
+    }
+
+    private void createTables(ConnectInfo srcConnectInfo, ConnectInfo dstConnectInfo, ImmutableSet<TablesDO> prepareCreateTables,
+                              List<String> excludeTables) {
+        prepareCreateTables
+                .parallelStream()
+                .filter(table -> !ListUtils.isContains(excludeTables, table.getTableName()))
+                .forEach(table -> {
+                    // 待建的库名，表名
+                    String tableSchema = table.getTableSchema();
+                    String tableName = table.getTableName();
+
+                    // 从src中获取到 tableName 的 建表语句
+                    String sql = DaoFacade.showCreateTable(srcConnectInfo, tableSchema, tableName);
+
+                    // 有个建表语句,就去 dst中执行创建
+                    String useDBSql = String.format("use %s;", tableSchema);
+                    DaoFacade.execBatchSql(dstConnectInfo, Lists.newArrayList(useDBSql, sql));
+                });
+    }
+
+
+    // ------------------------------------  sync table ------------------------------------
 
     @Override
     public void syncTable(SyncTableRequest syncInfo) {
@@ -38,7 +168,7 @@ public class SyncServiceImpl implements SyncService {
         syncColumns(syncInfo);
 
         // 同步索引
-        // syncStatistics(syncInfo);
+        syncStatistics(syncInfo);
     }
 
     private void syncStatistics(SyncTableRequest syncInfo) {
@@ -77,8 +207,18 @@ public class SyncServiceImpl implements SyncService {
         Set<ColumnsDO> srcColumns = DaoFacade.ofMapper(srcConnectInfo, ColumnsMapper.class, mapper -> mapper.selectByTable(syncInfo.getDatabaseName(), syncInfo.getTableName()));
         Set<ColumnsDO> dstColumns = DaoFacade.ofMapper(dstConnectInfo, ColumnsMapper.class, mapper -> mapper.selectByTable(syncInfo.getDatabaseName(), syncInfo.getTableName()));
 
+        System.out.println("srcColumns = " + srcColumns);
+
+        System.out.println("dstColumns = " + dstColumns);
+
+        Set<ColumnsDO> diff = Sets.difference(srcColumns, dstColumns).immutableCopy();
+
+        System.out.println("diff = " + diff);
+
         // 3.diff 字段差异
         List<ColumnsDO> columnDiffInfo = diffColumns(srcColumns, dstColumns);
+
+        System.out.println("columnDiffInfo = " + columnDiffInfo);
 
         // 4.生成差异待修改的字段SQL
         List<String> columnsSql = genColumnSql(columnDiffInfo);
@@ -120,12 +260,14 @@ public class SyncServiceImpl implements SyncService {
         // 需要做插入的,而非做修改
         Set<String> diffColumnName = Sets.difference(srcColumnNameSet, dstColumnNameSet).immutableCopy();
 
+        Set<ColumnsDO> diffInfo = Sets.difference(srcColumns, dstColumns).immutableCopy();
+
         return Sets.difference(srcColumns, dstColumns)
                 .stream()
                 // 在进行列字段的diff比较之前，将需要插入的字段进行单独标记
                 .peek(column -> checkAddFlag(diffColumnName, column))
                 .distinct()
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
     }
 
     private void checkAddFlag(Set<String> diffColumnName, ColumnsDO column) {

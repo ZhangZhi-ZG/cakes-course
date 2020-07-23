@@ -1,11 +1,16 @@
 package course.schema.sync.controller;
 
-import course.schema.sync.model.*;
+import course.schema.sync.model.RetMsg;
+import course.schema.sync.model.SyncDatabaseRequest;
+import course.schema.sync.model.SyncInstanceRequest;
+import course.schema.sync.model.SyncTableRequest;
 import course.schema.sync.service.SyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * author: xiha
@@ -24,6 +29,7 @@ public class SyncController {
     public RetMsg doSyncInstance(@RequestBody SyncInstanceRequest syncRequest) {
         LOGGER.info("do sync start. syncInfo = {}", syncRequest);
 
+        // send to redis.  // ==> 1000次。 1次 ==》 3-5分钟
         try {
             syncRequest.verify();
 
