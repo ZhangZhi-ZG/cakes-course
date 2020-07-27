@@ -1,6 +1,8 @@
 package course.patterns.builder;
 
 import lombok.Builder;
+import lombok.Data;
+
 //
 @Builder
 public class User2 {

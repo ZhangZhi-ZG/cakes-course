@@ -4,7 +4,7 @@ package course.patterns.chain.case3;
  * @author zzhg
  * @create time 2020-07-22 16:36
  */
-public class VedioHandlerManager {
+public final class VedioHandlerManager {
     private AbstractParseHandler<MyVedio> vedioParseHandler;
 
     private VedioHandlerManager() {

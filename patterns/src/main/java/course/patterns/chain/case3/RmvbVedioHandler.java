@@ -6,7 +6,7 @@ package course.patterns.chain.case3;
  */
 public class RmvbVedioHandler extends AbstractParseHandler<MyVedio> {
     @Override
-    public boolean prehandle(MyVedio myVedio) {
+    public boolean preHandle(MyVedio myVedio) {
         return myVedio.getVedioType().equals(VedioType.RMVB.toString());
     }
 

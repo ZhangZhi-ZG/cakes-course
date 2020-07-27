@@ -17,14 +17,14 @@ public class helloProxy implements helloService {
     @Override
     public void sayHello() {
         System.out.println("sys hello before.");
-        hello.sayHello();;
+        hello.sayHello();
         System.out.println("say hello after..");
     }
 
     @Override
     public void sayHi() {
         System.out.println("sys hi before.");
-        hello.sayHello();;
+        hello.sayHello();
         System.out.println("say hi after..");
     }
 }

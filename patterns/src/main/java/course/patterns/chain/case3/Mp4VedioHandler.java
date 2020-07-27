@@ -6,7 +6,7 @@ package course.patterns.chain.case3;
  */
 public class Mp4VedioHandler extends AbstractParseHandler<MyVedio> {
     @Override
-    public boolean prehandle(MyVedio myVedio) {
+    public boolean preHandle(MyVedio myVedio) {
         return myVedio.getVedioType().equals(VedioType.MP4.toString());
     }
 

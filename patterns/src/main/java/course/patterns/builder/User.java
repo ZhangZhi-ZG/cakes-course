@@ -16,6 +16,10 @@ public class User {
         this.balance = builder.balance;
     }
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
     public static class Builder {
         private String name;
         private Integer age;
@@ -75,10 +79,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
-
-
-
 
     public String getBalance() {
         return balance;

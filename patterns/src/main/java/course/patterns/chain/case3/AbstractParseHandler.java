@@ -12,13 +12,13 @@ public abstract class AbstractParseHandler<T> {
         this.nextParseHandler = nextParseHandler;
     }
 
-    public abstract boolean prehandle(T t);
+    protected abstract boolean preHandle(T t);
 
-    public abstract void onHandle(T t);
+    protected abstract void onHandle(T t);
 
-    public void doHandle(T t) {
+    protected void doHandle(T t) {
 
-        if (prehandle(t)) {
+        if (preHandle(t)) {
             onHandle(t);
         }
         System.out.println("this.nextParseHandler = " + this.nextParseHandler);
