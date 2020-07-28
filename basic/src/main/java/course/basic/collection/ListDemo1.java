@@ -1,12 +1,14 @@
 package course.basic.collection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author haoc
  */
 public class ListDemo1 {
+
 
     public static void main(String[] args) {
 //    test1();
@@ -20,7 +22,15 @@ public class ListDemo1 {
         test5();
     }
 
+    public static void foo() {
+
+
+    }
+
+
     public static void test5() {
+
+
         List<String> list = new ArrayList<>();
         //添加元素
         list.add("a");
@@ -31,14 +41,13 @@ public class ListDemo1 {
         List<String> newList = list.subList(0, 2);
 
         System.out.println("newList = " + newList);
-        list.subList(0,1);
+        list.subList(0, 1);
         String[] strArr = list.toArray(new String[]{"0"});
-        for (String s : strArr) {
-            System.out.println("s = " + s);
-        }
-
+        Arrays.stream(strArr).forEach(str -> System.out.println("str = " + str));
+        // for (String s : strArr) {
+        //     System.out.println("s = " + s);
+        // }
     }
-
 
 
     public static void test4() {

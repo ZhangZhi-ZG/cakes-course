@@ -3,27 +3,34 @@ package course.basic.collection;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 
 /**
  * @author haoc
  */
 public class Guavas {
 
-  public static void main(String[] args) {
-    Map<String, String> map = new HashMap<>();
-    Map<String, String> map1 = Maps.newHashMap();
+    public static void main(String[] args) {
+        List<String> emptyList = Collections.emptyList();
+        String name = "zhang san";
+        List<String> singletonList = Collections.singletonList(name);
+        singletonList.add(1, "li si");
 
-    List<String> list = new ArrayList<>();
-    List<String> list1 = Lists.newArrayList();
+        System.out.println("singletonList = " + singletonList);
 
-    Set<String> set = new HashSet<>();
-    Set<String> set1 = Sets.newHashSet();
-  }
+    }
+
+
+    public static void foo1() {
+        Map<String, String> map = new HashMap<>();
+        Map<String, String> map1 = Maps.newHashMap();
+
+        List<String> list = new ArrayList<>();
+        List<String> list1 = Lists.newArrayList();
+
+        Set<String> set = new HashSet<>();
+        Set<String> set1 = Sets.newHashSet();
+    }
 
 }
