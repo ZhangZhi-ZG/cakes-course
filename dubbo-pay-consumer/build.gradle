@@ -1,0 +1,11 @@
+dependencies {
+    // dubbo服务最佳实践中推荐的写法,将服务的描述独立成为一个jar,需要的地方做引入
+    implementation('course:dubbo-pay-api:1.0.0-SNAPSHOT')
+
+    // dubbo相关依赖
+    implementation('com.alibaba:dubbo:2.6.6')
+    implementation('io.netty:netty-all:4.1.34.Final')
+    implementation('org.apache.zookeeper:zookeeper:3.4.14')
+    implementation('org.apache.curator:curator-framework:2.13.0')
+    implementation('org.apache.curator:curator-recipes:2.13.0')
+}

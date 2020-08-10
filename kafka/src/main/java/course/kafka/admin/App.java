@@ -3,17 +3,17 @@ package course.kafka.admin;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+// import static org.assertj.core.api.Assertions.assertThat;
 
 public class App {
 
     private static final String TEST_TOPIC_NAME = "hello-kafka";
 
-    @Test
-    public void testCreateAdminClient() {
-        AdminClient adminClient = BuildAdminClient.createAdminClient();
-        assertThat(adminClient).isNotNull();
-    }
+    // @Test
+    // public void testCreateAdminClient() {
+    //     AdminClient adminClient = BuildAdminClient.createAdminClient();
+    //     assertThat(adminClient).isNotNull();
+    // }
 
     @Test
     public void testCreateTopic() throws Exception {

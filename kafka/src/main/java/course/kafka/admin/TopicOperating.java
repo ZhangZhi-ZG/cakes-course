@@ -60,6 +60,7 @@ public class TopicOperating {
         // 列出所有的topic
         ListTopicsResult result = adminClient.listTopics();
 
+
         // 解析获取结果
         Set<String> names = result.names().get();
         for (String name : names) {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Demo2 {
-
+    //BUG
     public static void main(String[] args) {
         testStream();
 

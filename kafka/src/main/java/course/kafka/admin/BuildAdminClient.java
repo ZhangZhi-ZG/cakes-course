@@ -15,7 +15,7 @@ public class BuildAdminClient {
     public static AdminClient createAdminClient() {
         Properties props = new Properties();
 
-        props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "139.219.4.19:9092");
 
         return AdminClient.create(props);
     }

@@ -17,11 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration // ==> beans.xml
 @ServletComponentScan(basePackages = "course.boot.examples.component")
-<<<<<<< HEAD
-@EnableScheduling   //开启定时任务
-=======
 // @EnableScheduling  //开启定时任务
->>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
 public class BasicConfiguration implements WebMvcConfigurer {
 
     //添加过滤器
