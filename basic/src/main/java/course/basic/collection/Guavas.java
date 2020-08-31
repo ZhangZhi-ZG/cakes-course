@@ -12,6 +12,7 @@ import java.util.*;
 public class Guavas {
 
     public static void main(String[] args) {
+
         List<String> emptyList = Collections.emptyList();
         String name = "zhang san";
         List<String> singletonList = Collections.singletonList(name);
@@ -24,6 +25,8 @@ public class Guavas {
 
     public static void foo1() {
         Map<String, String> map = new HashMap<>();
+
+        map.put(null,null);
         Map<String, String> map1 = Maps.newHashMap();
 
         List<String> list = new ArrayList<>();

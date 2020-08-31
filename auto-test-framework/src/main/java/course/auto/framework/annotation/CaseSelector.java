@@ -1,6 +1,6 @@
 package course.auto.framework.annotation;
 
-import course.auto.framework.extension.CaseEngineExtension;
+import course.auto.framework.engine.CaseEngineExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
