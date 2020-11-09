@@ -37,6 +37,8 @@ public class TestCreateOrder {
     @CaseTag(key = "module", val = "pay")
     @CaseTag(key = "level", val = "redline")
     public void test3() {
+        int num = 2 / 0;
+        System.out.println("num = " + num);
         System.out.println("order ... TestCreateOrder.test3");
     }
 

@@ -3,12 +3,15 @@ package course.auto.framework.test.cases.run;
 import course.auto.framework.alarm.callback.DefaultAlarmCallback;
 import course.auto.framework.annotation.CaseSelector;
 import course.auto.framework.annotation.DingTalkAlarm;
+import course.auto.framework.annotation.EnvProfile;
 
 public class RunRedLine {
 
+    // ZZHG:LINE: 1. 自动化测试入口，根据@CaseSelector筛选并运行指定的测试用例
     // @CaseSelector(scanPackage = "course.auto.framework.test.cases.pay", key = "level", val = "redline")
     @CaseSelector(scanPackage = "course.auto.framework.test.cases.pay", key = "level", val = "redline")
-    @DingTalkAlarm(token = "", callback = DefaultAlarmCallback.class)
+    // @DingTalkAlarm(token = "", callback = DefaultAlarmCallback.class)
+    @EnvProfile("dev")
     public void runPayRedLine() {
         //
     }

@@ -7,6 +7,7 @@ import course.auto.framework.annotation.*;
  */
 public class TestCreatePay {
 
+    // ZZHG:LINE: 3. 运行指定的用例集合
     @AutoTest
     @CaseTitle("xxx")
     @CaseDesc(desc = "xxx", owner = "xxx")

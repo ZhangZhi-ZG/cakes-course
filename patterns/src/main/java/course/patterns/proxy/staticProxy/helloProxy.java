@@ -24,7 +24,7 @@ public class helloProxy implements helloService {
     @Override
     public void sayHi() {
         System.out.println("sys hi before.");
-        hello.sayHello();
+        hello.sayHi();
         System.out.println("say hi after..");
     }
 }

@@ -8,6 +8,10 @@ public  class staticDemo {
     //static修饰内部类
     public static class InnerClass{
 
+        public static void foo2() {
+            System.out.println("InnerClass.foo2");
+        }
+
         //没有被static修饰，需要实例化才能被调用
         public void foo1(){
             System.out.println("静态类的内部方法");
@@ -22,6 +26,7 @@ public  class staticDemo {
 
 
     public static void main(String[] args) {
+        staticDemo.InnerClass.foo2();
         //直接通过类名调用，不需要实例化
         System.out.println("staticDemo.name = " + staticDemo.name);
         //直接通过staticDemo类名访问InnerClass

@@ -33,9 +33,11 @@ public class CaseEngineExtension implements BeforeTestExecutionCallback {
     @Override
     public void beforeTestExecution(ExtensionContext context) throws Exception {
         Method testMethod = context.getRequiredTestMethod();
+
+        // ZZHG:NODE: 对CaseSelector进行非空校验
         CaseSelector selector = invalidedSelector(testMethod.getAnnotation(CaseSelector.class));
 
-
+        // ZZHG:LINE: 2. 筛选待执行的测试用例，并构造请求
         // 构造发现用例的请求实体
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
@@ -50,15 +52,20 @@ public class CaseEngineExtension implements BeforeTestExecutionCallback {
         // 信息结果收集的监听器
         SummaryGeneratingListener summaryGeneratingListener = new SummaryGeneratingListener();
 
+
+
         // 处理失败的监听器: 自定义的
         boolean isAlarmSet = testMethod.isAnnotationPresent(DingTalkAlarm.class);
         if (isAlarmSet) {
             DingTalkAlarm dingTalkAlarm = testMethod.getAnnotation(DingTalkAlarm.class);
             FailureListener failureListener = new FailureListener(dingTalkAlarm.token(), dingTalkAlarm.callback());
             LauncherFactory.create().execute(request, summaryGeneratingListener, failureListener);
+
+            // System.out.println("summaryGeneratingListener.getSummary() = " + summaryGeneratingListener.getSummary());
         } else {
             LauncherFactory.create().execute(request, summaryGeneratingListener);
         }
+        TestExecutionSummary executionSummary = summaryGeneratingListener.getSummary();
 
         boolean isReportConfigSet = testMethod.isAnnotationPresent(ReportConfig.class);
         if (isReportConfigSet) {
@@ -69,7 +76,7 @@ public class CaseEngineExtension implements BeforeTestExecutionCallback {
         }
 
         // 插入MySQL
-        // SummaryResultDao,insert(summaryResult)
+        // SummaryResultDao.insert(summaryResult)
     }
 
     private SummaryResult transToSummaryResult(TestExecutionSummary summary) {

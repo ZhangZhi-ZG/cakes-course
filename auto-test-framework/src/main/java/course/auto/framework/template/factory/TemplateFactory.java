@@ -24,9 +24,7 @@ public final class TemplateFactory {
 
     private Map<String, TemplateInfo> initTemplateMapping() {
         // 模板文件全部加载出来并封装进map
-        // String rootPathString = this.getClass().getResource(TEMPLATES_ROOT_PATH).getPath();
         String rootPathString = Resources.getResource(TEMPLATES_ROOT_PATH).getPath();
-        System.out.println("rootPathString = " + rootPathString);
         Path rootPath = Paths.get(rootPathString);
         try {
             return Files.walk(rootPath)

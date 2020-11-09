@@ -2,6 +2,7 @@ package course.auto.framework.annotation;
 
 import course.auto.framework.format.observer.CaseFormatExtension;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.lang.annotation.*;

@@ -6,4 +6,8 @@ public class HttpResponse {
     public HttpResponse(String body) {
         this.body = body;
     }
+
+    public String getBody() {
+        return body;
+    }
 }

@@ -18,8 +18,10 @@ import java.util.List;
 public class AppForSelectUser2 {
 
     public static void main(String[] args) throws IOException {
+        // List<String> strings = Arrays.asList("1", "1");
+
         InputStream ins = Resources.getResource(MyBatisConst.CONFIG_FILE_NAME).openStream();
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(ins,"test");
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(ins, "test");
         SqlSession session = factory.openSession(true);
         TbUserMapper tbUserMapper = session.getMapper(TbUserMapper.class);
         List<TbUser> users = tbUserMapper.selectUser2("1000003", "zhangsan3");

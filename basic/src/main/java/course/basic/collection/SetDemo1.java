@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author haoc
@@ -11,8 +12,9 @@ import java.util.Set;
 public class SetDemo1 {
 
   public static void main(String[] args) {
-//    test1();
-    test2();
+
+   test1();
+//     test2();
   }
 
   private static void test2() {
@@ -53,6 +55,10 @@ public class SetDemo1 {
     set.add("a");
     set.add("a");
     set.add("b");
+    set.add(null);
+    set.add("adb");
+
+    set.size();
 
     System.out.println("set = " + set);
 

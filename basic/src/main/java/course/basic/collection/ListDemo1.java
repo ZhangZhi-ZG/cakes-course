@@ -1,8 +1,6 @@
 package course.basic.collection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author haoc
@@ -29,7 +27,9 @@ public class ListDemo1 {
 
 
     public static void test5() {
-
+        LinkedList<String> alist = new LinkedList<>();
+        alist.add("zhang san");
+        // alist.
 
         List<String> list = new ArrayList<>();
         //添加元素
@@ -68,6 +68,7 @@ public class ListDemo1 {
         System.out.println("isEmp2 = " + isEmp2);
 
         //根据索引修改元素值
+
         list1.set(1, "hello");
         for (String ss : list1) {
             System.out.println(ss);

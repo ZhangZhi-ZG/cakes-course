@@ -57,7 +57,6 @@ public class PayController {
     public String pay4(@PathVariable("id") String id) {
 
         LOGGER.info("pay4 start. payId={}", id);
-
         return "pay4:success";
     }
 

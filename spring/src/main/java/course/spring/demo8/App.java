@@ -7,15 +7,15 @@ public class App {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Demo8Conf.class);
 
-        // Demo8Foo foo1 = context.getBean(Demo8Foo.class);
-        // Demo8Foo foo2 = context.getBean(Demo8Foo.class);
-        // Demo8Foo foo3 = context.getBean(Demo8Foo.class);
-        // Demo8Foo foo4 = context.getBean(Demo8Foo.class);
-        //
-        // System.out.println("foo1 = " + foo1);
-        // System.out.println("foo2 = " + foo2);
-        // System.out.println("foo3 = " + foo3);
-        // System.out.println("foo4 = " + foo4);
+        Demo8Foo foo1 = context.getBean(Demo8Foo.class);
+        Demo8Foo foo2 = context.getBean(Demo8Foo.class);
+        Demo8Foo foo3 = context.getBean(Demo8Foo.class);
+        Demo8Foo foo4 = context.getBean(Demo8Foo.class);
+
+        System.out.println("foo1 = " + foo1);
+        System.out.println("foo2 = " + foo2);
+        System.out.println("foo3 = " + foo3);
+        System.out.println("foo4 = " + foo4);
 
         // foo.test();
 

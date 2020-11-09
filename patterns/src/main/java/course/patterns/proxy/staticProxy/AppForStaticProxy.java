@@ -4,6 +4,6 @@ public class AppForStaticProxy {
 
     public static void main(String[] args) {
         helloProxy helloProxy = new helloProxy();
-        helloProxy.sayHi();
+        helloProxy.sayHello();
     }
 }

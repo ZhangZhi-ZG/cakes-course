@@ -57,7 +57,7 @@ public class Demo1 {
             System.out.println("method.getName() = " + method.getName());
             //获取方法的异常类型
             Class<?>[] types = method.getExceptionTypes();
-            // method.invoke("makeLove","");
+            method.invoke("makeLove","");
             for (Class<?> type : types) {
                 System.out.println("ex type=" + type);
             }

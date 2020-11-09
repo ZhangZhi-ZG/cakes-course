@@ -35,6 +35,10 @@ public class Animal {
     return i1 + 1024;
   }
 
+  String foo3(int i1, String str,String name) {
+    return "1024";
+  }
+
   void foo4(int i1, String... strs) {
     String[] ss = strs;
     for (String s : ss) {

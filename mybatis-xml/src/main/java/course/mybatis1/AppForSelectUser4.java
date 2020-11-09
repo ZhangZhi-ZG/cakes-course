@@ -18,6 +18,7 @@ import java.util.List;
 public class AppForSelectUser4 {
 
     public static void main(String[] args) throws IOException {
+
         InputStream ins = Resources.getResource(MyBatisConst.CONFIG_FILE_NAME).openStream();
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(ins);
         SqlSession session = factory.openSession(true);

@@ -7,7 +7,6 @@ public class App {
 
     public static void main(String[] args) throws ClassNotFoundException {
         ApplicationContext context = new ClassPathXmlApplicationContext("demo2/beans.xml");
-
         //class类型
         HeheService service = context.getBean(HeheService.class);
         //bean的ID

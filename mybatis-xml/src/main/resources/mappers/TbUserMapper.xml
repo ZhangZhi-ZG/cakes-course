@@ -2,14 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
-<mapper namespace="course.mybatis1.mapper.TbUserMapper">
 
-=======
+
 <!--namespace-数据库表实体bean的类引用名，全路径-->
 <mapper namespace="course.mybatis1.mapper.TbUserMapper">
     <!--id-数据库表实体bean中的方法名，resultType-方法的返回值类型-->
->>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998
     <select id="selectByUserId" resultType="course.mybatis1.bean.TbUser">
         select * from `tb_user` where `user_id` = #{userId}
     </select>
@@ -83,8 +80,5 @@
             (#{u.userId},#{u.userName})
         </foreach>
     </insert>
-<<<<<<< HEAD
+
 </mapper>
-=======
-</mapper>
->>>>>>> a7997e3359f619d7d7409cb5b3c0327378de9998

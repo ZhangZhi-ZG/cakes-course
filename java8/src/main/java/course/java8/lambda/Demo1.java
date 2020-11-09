@@ -26,6 +26,7 @@ public class Demo1 {
     }
 
     public void foo2() {
+
         // lambda 表达式做的简化写法处理
         Runnable runnable1 = () -> System.out.println("Demo1.run1");
         Runnable runnable2 = () -> System.out.println("Demo1.run2");
